@@ -1,7 +1,10 @@
 package com.uniq.HotelManagement.Entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uniq.HotelManagement.Enum.UserRole;
 
 import jakarta.persistence.CascadeType;
@@ -13,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -26,7 +30,11 @@ public class Admin {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "userId")
+	@JsonBackReference
 	private User user;
+	
+    @Column(name = "admin_name", nullable = false)
+	private String adminName;
 	
 	@Column(name = "admin_email", nullable = false, unique = true)
 	private String adminEmail;
@@ -41,17 +49,24 @@ public class Admin {
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 	
+	@OneToMany(mappedBy = "admin", orphanRemoval = false) // to not delete child entity from DB when parent entity becomes null
+	@JsonManagedReference
+	private List<Room> room;
+	
+	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<CheckInOut> checkInOut;
+	
 
 	public Admin() {
 		super();
 	}
 
-	
-	public Admin(Integer adminId, User user, String adminEmail, String adminPassword, UserRole adminRole,
+	public Admin(User user, String adminName, String adminEmail, String adminPassword, UserRole adminRole,
 			LocalDateTime createdAt) {
 		super();
-		this.adminId = adminId;
 		this.user = user;
+		this.adminName = adminName;
 		this.adminEmail = adminEmail;
 		this.adminPassword = adminPassword;
 		this.adminRole = adminRole;
@@ -62,12 +77,7 @@ public class Admin {
 	public Integer getAdminId() {
 		return adminId;
 	}
-
-
-	public void setAdminId(Integer adminId) {
-		this.adminId = adminId;
-	}
-
+	
 
 	public User getUser() {
 		return user;
@@ -78,6 +88,14 @@ public class Admin {
 		this.user = user;
 	}
 
+
+	public String getAdminName() {
+		return adminName;
+	}
+
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
 
 	public String getAdminEmail() {
 		return adminEmail;
@@ -118,11 +136,10 @@ public class Admin {
 		this.createdAt = createdAt;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", user=" + user + ", adminEmail=" + adminEmail + ", adminPassword="
-				+ adminPassword + ", adminRole=" + adminRole + ", createdAt=" + createdAt + "]";
+		return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", adminEmail=" + adminEmail
+				+ ", adminPassword=" + adminPassword + ", adminRole=" + adminRole + ", createdAt=" + createdAt + "]";
 	}
 	
 	

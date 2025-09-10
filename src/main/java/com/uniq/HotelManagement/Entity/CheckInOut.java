@@ -1,7 +1,7 @@
 package com.uniq.HotelManagement.Entity;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.uniq.HotelManagement.Enum.CheckInOutStatus;
 
 import jakarta.persistence.Column;
@@ -26,26 +26,118 @@ public class CheckInOut {
 	
 	@OneToOne
 	@JoinColumn(name = "booking_id", referencedColumnName = "bookingId")
+	@JsonBackReference
 	private Booking booking;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "userId")
+	@JsonBackReference
 	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "admin_id", referencedColumnName = "adminId" )
+	@JsonBackReference
 	private Admin admin;
 	
+	@ManyToOne
+	@JoinColumn(name = "room_id", referencedColumnName = "roomId")
+	@JsonBackReference
+	private Room room;
+	
 	@Column(name = "check_in_time", updatable = false)
-	private LocalDateTime checkInTime;
+	private LocalDate checkInDate;
 	
 	@Column(name = "check_out_time", updatable = false)
-	private LocalDateTime checkOutTime;
+	private LocalDate checkOutDate;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private CheckInOutStatus checkInOutStatus;
 	
+
+	public CheckInOut() {
+		super();
+	}
+
+	public CheckInOut(Booking booking, User user, Admin admin, Room room, LocalDate checkInDate, LocalDate checkOutDate,
+			CheckInOutStatus checkInOutStatus) {
+		super();
+		this.booking = booking;
+		this.user = user;
+		this.admin = admin;
+		this.room = room;
+		this.checkInDate = checkInDate;
+		this.checkOutDate = checkOutDate;
+		this.checkInOutStatus = checkInOutStatus;
+	}
+
+
+	public Integer getCheckInOutId() {
+		return checkInOutId;
+	}
+
+	public Booking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+	
+	
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public LocalDate getCheckInDate() {
+		return checkInDate;
+	}
+
+	public void setCheckInDate(LocalDate checkInDate) {
+		this.checkInDate = checkInDate;
+	}
+
+	public LocalDate getCheckOutDate() {
+		return checkOutDate;
+	}
+
+	public void setCheckOutDate(LocalDate checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
+
+	public CheckInOutStatus getCheckInOutStatus() {
+		return checkInOutStatus;
+	}
+
+	public void setCheckInOutStatus(CheckInOutStatus checkInOutStatus) {
+		this.checkInOutStatus = checkInOutStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "CheckInOut [checkInOutId=" + checkInOutId + ", checkInDate=" + checkInDate + ", checkOutDate="
+				+ checkOutDate + ", checkInOutStatus=" + checkInOutStatus + "]";
+	}
 
 	
 }

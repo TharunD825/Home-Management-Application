@@ -1,9 +1,12 @@
 package com.uniq.HotelManagement.Entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uniq.HotelManagement.Enum.UserRole;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +14,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -43,15 +48,28 @@ public class User {
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Booking> booking;
+	
+	@OneToOne(mappedBy = "user")
+	@JsonManagedReference
+	private Admin admin;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<CheckInOut> checkInOut;
+	
+	
 	public User() {
 		super();
 	}
 
 
-	public User(Integer userId, String userName, String userEmail, String userPassword, String userPhone,
+	public User(String userName, String userEmail, String userPassword, String userPhone,
 			UserRole userRole, String userAddress, LocalDateTime createdAt) {
 		super();
-		this.userId = userId;
+		
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
@@ -64,11 +82,6 @@ public class User {
 
 	public Integer getUserId() {
 		return userId;
-	}
-
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
 	}
 
 
@@ -139,6 +152,34 @@ public class User {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+
+	public List<Booking> getBooking() {
+		return booking;
+	}
+
+
+	public void setBooking(List<Booking> booking) {
+		this.booking = booking;
+	}
+	
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+		
+		/* ----- x ----- */
+		
+//		if(admin != null) {
+//			
+//			admin.setUser(this);
+//		}
+		
 	}
 
 

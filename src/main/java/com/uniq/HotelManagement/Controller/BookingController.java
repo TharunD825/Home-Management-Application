@@ -1,6 +1,11 @@
 package com.uniq.HotelManagement.Controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +29,20 @@ public class BookingController {
 	}
 	
 	@PostMapping("/register")
-	public BookingResponseDTO createBooking(@RequestBody BookingRequestDTO bookingRequestDTO) {
+	public ResponseEntity<Map<String, Object>> createBooking(@RequestBody BookingRequestDTO bookingRequestDTO) {
 		
 		BookingResponseDTO bookingResponseDTO = bookingService.createBooking(bookingRequestDTO);
 		
-		return bookingResponseDTO;
+		/* ----- x ----- */
+		
+        Map<String, Object> response = new HashMap<>();
+		
+		response.put("data", bookingResponseDTO);
+		response.put("message", "Succesfully registered!");
+		response.put("status", HttpStatus.CREATED.value());
+		
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
+		
 		
 	}
 

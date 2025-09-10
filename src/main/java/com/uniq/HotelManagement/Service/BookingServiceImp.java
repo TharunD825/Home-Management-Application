@@ -120,6 +120,7 @@ public class BookingServiceImp implements BookingService{
 		check.setCheckInOutStatus(CheckInOutStatus.PENDING);
 		check.setBooking(savedBooking);
 		check.setRoom(room);
+		check.setUser(user);
 		check.setAdmin(null);
 		
 		CheckInOut savedCheck = checkInOutRepository.save(check);				

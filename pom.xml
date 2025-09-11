@@ -78,12 +78,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.july.boot</groupId>
-			<artifactId>CRUD</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 	</dependencies>
 
 	<build>

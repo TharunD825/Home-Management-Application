@@ -62,7 +62,6 @@ public class UserResponseDTO {
 		return "UserResponseDTO [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
 				+ ", userPhone=" + userPhone + ", userRole=" + userRole + ", userAddress=" + userAddress
 				+ ", createdAt=" + createdAt + "]";
-	}
+	}	
 	
-
 }

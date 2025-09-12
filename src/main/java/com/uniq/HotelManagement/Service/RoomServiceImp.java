@@ -14,6 +14,8 @@ import com.uniq.HotelManagement.Mapper.RoomMapper;
 import com.uniq.HotelManagement.Repository.AdminRepository;
 import com.uniq.HotelManagement.Repository.RoomRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RoomServiceImp implements RoomService {
 	
@@ -32,6 +34,7 @@ public class RoomServiceImp implements RoomService {
 	
 	/* ----- POST ----- */
 	
+	@Transactional
 	public RoomResponseDTO addRoom(RoomRequestDTO roomRequestDTO) {
 		
 		String adminEmail = roomRequestDTO.getAdminEmail();

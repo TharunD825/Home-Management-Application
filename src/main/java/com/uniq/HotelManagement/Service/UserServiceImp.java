@@ -15,6 +15,8 @@ import com.uniq.HotelManagement.Enum.UserRole;
 import com.uniq.HotelManagement.Repository.AdminRepository;
 import com.uniq.HotelManagement.Repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UserServiceImp implements UserService {
 	
@@ -36,6 +38,7 @@ public class UserServiceImp implements UserService {
 	
 	/* ----- POST ----- */
 	
+	@Transactional
 	public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
 		
 		

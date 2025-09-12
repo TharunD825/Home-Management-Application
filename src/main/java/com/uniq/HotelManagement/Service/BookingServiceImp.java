@@ -22,6 +22,8 @@ import com.uniq.HotelManagement.Repository.CheckInOutRepository;
 import com.uniq.HotelManagement.Repository.RoomRepository;
 import com.uniq.HotelManagement.Repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class BookingServiceImp implements BookingService{
 	
@@ -46,6 +48,7 @@ public class BookingServiceImp implements BookingService{
 	
 	/* ----- POST ----- */
 	
+	@Transactional
 	public BookingResponseDTO createBooking(BookingRequestDTO bookingRequestDTO) {
 		
 		Integer userId = bookingRequestDTO.getUserId();
@@ -76,7 +79,7 @@ public class BookingServiceImp implements BookingService{
 		
 		
 		
-		LocalDate checkInDate = LocalDate.parse(bookingRequestDTO.getCheckInDate());
+		LocalDate checkInDate = LocalDate.parse(bookingRequestDTO.getCheckInDate());  // changes string to LocalDate
 		
 		LocalDate checkOutDate = LocalDate.parse(bookingRequestDTO.getCheckOutDate());
 		
@@ -105,7 +108,7 @@ public class BookingServiceImp implements BookingService{
 		
 		booking.setCreatedAt(LocalDateTime.now());
 		
-		booking.setBookingStatus(BookingStatus.CONFIRMED);
+		booking.setBookingStatus(BookingStatus.PENDING);
 
 		
 		Booking savedBooking = bookingRepository.save(booking); //save Entity
@@ -123,7 +126,7 @@ public class BookingServiceImp implements BookingService{
 		check.setUser(user);
 		check.setAdmin(null);
 		
-		CheckInOut savedCheck = checkInOutRepository.save(check);				
+		checkInOutRepository.save(check); //saving details in CheckInOut table		
 		
 		/* ----- x ----- */
 		

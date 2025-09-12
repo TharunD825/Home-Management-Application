@@ -1,23 +1,37 @@
 package com.uniq.HotelManagement.DTO;
 
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class UserRequestDTO {
 	
+	@NotBlank(message = "Name should not be empty")
+	@Size(min=3, message = "Name length should be greater than 3")
 	private String userName;
+	
+	@NotBlank(message = "Name should not be empty")
 	private String userEmail;
+	
+	@NotBlank(message = "Password should not be empty")
     private String userPassword;
+	
+	@NotBlank(message = "Phone number should not be empty")
+	@Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
 	private String userPhone;
+	
+	@NotBlank(message = "Role should not be empty")
 	private String userRole;
+	
+	@NotBlank(message = "Address should not be empty")
 	private String userAddress;
-	private LocalDateTime createdAt;
 	
 	public UserRequestDTO() {
 		super();
 	}
 
 	public UserRequestDTO(String userName, String userEmail, String userPassword, String userPhone, String userRole,
-			String userAddress, LocalDateTime createdAt) {
+			String userAddress) {
 		super();
 		this.userName = userName;
 		this.userEmail = userEmail;
@@ -25,7 +39,6 @@ public class UserRequestDTO {
 		this.userPhone = userPhone;
 		this.userRole = userRole;
 		this.userAddress = userAddress;
-		this.createdAt = createdAt;
 	}
 
 
@@ -78,19 +91,11 @@ public class UserRequestDTO {
 		this.userAddress = userAddress;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	@Override
 	public String toString() {
 		return "UserRequestDTO [userName=" + userName + ", userEmail=" + userEmail + ", userPassword=" + userPassword
-				+ ", userPhone=" + userPhone + ", userRole=" + userRole + ", userAddress=" + userAddress
-				+ ", createdAt=" + createdAt + "]";
+				+ ", userPhone=" + userPhone + ", userRole=" + userRole + ", userAddress=" + userAddress + "]";
 	}
+
 
 }

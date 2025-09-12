@@ -32,7 +32,7 @@ public class SecurityConfig {
 		
 		http.csrf( c -> c.disable())
 		    .authorizeHttpRequests(request -> request
-		    		.requestMatchers("/user/register", "/booking/register").permitAll()
+		    		.requestMatchers("/user/register", "/booking/register", "/room/add", "/bookedroom/checkin", "/bookedroom/checkout").permitAll()
 		    		.anyRequest().authenticated())
 		    .httpBasic(Customizer.withDefaults())
 		    .formLogin(login -> login.disable());

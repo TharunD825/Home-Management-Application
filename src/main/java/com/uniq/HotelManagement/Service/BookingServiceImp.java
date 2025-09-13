@@ -13,7 +13,7 @@ import com.uniq.HotelManagement.DTO.BookingResponseDTO;
 import com.uniq.HotelManagement.Entity.Booking;
 import com.uniq.HotelManagement.Entity.CheckInOut;
 import com.uniq.HotelManagement.Entity.Room;
-import com.uniq.HotelManagement.Entity.User;
+import com.uniq.HotelManagement.Entity.Users;
 import com.uniq.HotelManagement.Enum.BookingStatus;
 import com.uniq.HotelManagement.Enum.CheckInOutStatus;
 import com.uniq.HotelManagement.Mapper.BookingMapper;
@@ -53,14 +53,14 @@ public class BookingServiceImp implements BookingService{
 		Integer roomId = bookingRequestDTO.getRoomId();
 		
 		
-		Optional<User> optionaluser = userRepository.findById(userId);
+		Optional<Users> optionaluser = userRepository.findById(userId);
 		
 		if(!optionaluser.isPresent()) {
 			
 			throw new RuntimeException("user id: "+ userId + " not present.");
 		}
 		
-		User user = optionaluser.get(); //changes Integer to Object (complete user object - not just userId)
+		Users user = optionaluser.get(); //changes Integer to Object (complete user object - not just userId)
 		
 		
 		

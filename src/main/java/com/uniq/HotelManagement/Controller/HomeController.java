@@ -50,4 +50,9 @@ public class HomeController {
     public String about() {
         return "about"; 
     }
+    
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin"; 
+    }
 }

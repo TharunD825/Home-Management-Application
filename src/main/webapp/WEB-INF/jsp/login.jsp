@@ -77,7 +77,7 @@
 						<!-- Form -->
 						<div class="booking_form_container text-center"
 							style="margin-top: 200px;">
-							<form class="booking_form" action="/user/register" method="post">
+							<form class="booking_form" action="/user/login" method="post">
 
 								<!-- UserName -->
 								<div class="form-group">
@@ -95,7 +95,7 @@
 								<!-- Submit -->
 								<div class="form-group">
 									<button type="submit" class="booking_button trans_200">
-										Register Now</button>
+										Login</button>
 								</div>
 
 							</form>
@@ -195,14 +195,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const data = {
             userName: document.querySelector("[name='userName']").value,
-            userEmail: document.querySelector("[name='userEmail']").value,
-            userPassword: document.querySelector("[name='userPassword']").value,
-            userRole: document.querySelector("[name='userRole']").value,
-            userPhone: document.querySelector("[name='userPhone']").value,
-            userAddress: document.querySelector("[name='userAddress']").value
+            userPassword: document.querySelector("[name='userPassword']").value
         };
 
-        fetch("/user/register", {
+        fetch("/user/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -216,17 +212,22 @@ document.addEventListener("DOMContentLoaded", function() {
             return res.json();
         })
         .then(result => {
-            alert("User Registered: " + result.userName);
-            // redirect to login.jsp after successful register
-            window.location.href = "/";
+            if (result.userRole === "CUSTOMER") {
+                window.location.href = "/home";   // customer dashboard
+            } else if (result.userRole === "ADMIN") {
+                window.location.href = "/admin";  // admin dashboard
+            } else {
+                alert("Invalid role, please contact support.");
+            }
         })
         .catch(error => {
             console.error("Error:", error);
-            alert("Registration failed!");
+            alert("Login failed! Please check username & password.");
         });
     });
 });
 </script>
+
 
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="styles/bootstrap-4.1.2/popper.js"></script>

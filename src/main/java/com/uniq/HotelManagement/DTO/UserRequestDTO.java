@@ -2,10 +2,18 @@ package com.uniq.HotelManagement.DTO;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class UserRequestDTO {
 	
+	//@NotBlank(message = "username is required")
 	private String userName;
+	
+	//@NotBlank(message = "Email is required")
+   // @Email(message = "Invalid email format")
 	private String userEmail;
+	
     private String userPassword;
 	private String userPhone;
 	private String userRole;

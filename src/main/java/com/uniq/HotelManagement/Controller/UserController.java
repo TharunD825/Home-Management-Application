@@ -18,6 +18,8 @@ import com.uniq.HotelManagement.DTO.UserRequestDTO;
 import com.uniq.HotelManagement.DTO.UserResponseDTO;
 import com.uniq.HotelManagement.Service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {

@@ -29,13 +29,13 @@ public class User {
 	@Column(name = "user_name", nullable = false)
 	private String userName;
 	
-	@Column(name = "user_email", nullable = false, unique = true)
+	@Column(name = "user_email", nullable = false)
 	private String userEmail;
 	
-	@Column(name = "user_password", nullable = false, unique = true)
+	@Column(name = "user_password", nullable = false)
 	private String userPassword;
 	
-	@Column(name = "user_phone", nullable = false, unique = true)
+	@Column(name = "user_phone", nullable = false)
 	private String userPhone;
 	
 	@Enumerated(EnumType.STRING)

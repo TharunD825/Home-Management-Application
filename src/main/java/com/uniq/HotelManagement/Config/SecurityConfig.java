@@ -27,18 +27,27 @@ public class SecurityConfig {
 	}
 	
 	
+//	@Bean
+//	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//		
+//		http.csrf( c -> c.disable())
+//		    .authorizeHttpRequests(request -> request
+//		    		.requestMatchers("/user/register", "/booking/register").permitAll()
+//		    		.anyRequest().authenticated())
+//		    .httpBasic(Customizer.withDefaults())
+//		    .formLogin(login -> login.disable());
+//		
+//		return http.build();
+//		
+//	}
+	
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
-		http.csrf( c -> c.disable())
-		    .authorizeHttpRequests(request -> request
-		    		.requestMatchers("/user/register", "/booking/register").permitAll()
-		    		.anyRequest().authenticated())
-		    .httpBasic(Customizer.withDefaults())
-		    .formLogin(login -> login.disable());
-		
-		return http.build();
-		
-	}
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+      http
+          .csrf().disable()
+          .authorizeHttpRequests()
+          .anyRequest().permitAll(); // Allow all endpoints
+      return http.build();
+  }
 
 }

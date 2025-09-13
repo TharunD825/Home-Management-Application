@@ -23,11 +23,20 @@ public class UserMapper {
 		user.setUserName(userDTO.getUserName());
 		user.setUserEmail(userDTO.getUserEmail());
 		user.setUserPhone(userDTO.getUserPhone());
+		user.setUserPassword(userDTO.getUserPassword()); 
 		
-		if(userDTO.getUserRole() != null) {
-			
-			user.setUserRole( UserRole.valueOf(userDTO.getUserRole()) );  //UserRole.valueOf("ADMIN") - it results the matching value
-		}
+		 if (userDTO.getUserRole() != null && !userDTO.getUserRole().trim().isEmpty()) {
+		        user.setUserRole(UserRole.fromString(userDTO.getUserRole()));
+		    } else {
+		        // optional: set default role
+		        user.setUserRole(UserRole.CUSTOMER);  
+		    }
+		
+//		if(userDTO.getUserRole() != null) {
+//			
+//			user.setUserRole(UserRole.fromString(userDTO.getUserRole()));
+//			//user.setUserRole( UserRole.valueOf(userDTO.getUserRole()) );  //UserRole.valueOf("ADMIN") - it results the matching value
+//		}
 		
 		user.setUserAddress(userDTO.getUserAddress());
 //		user.setCreatedAt(userDTO.getCreatedAt());

@@ -11,7 +11,7 @@ public class UserResponseDTO {
 	private String userRole;
 	private String userAddress;
 	private LocalDateTime createdAt;
-	private String name;
+	
 	public UserResponseDTO() {
 		super();
 	}

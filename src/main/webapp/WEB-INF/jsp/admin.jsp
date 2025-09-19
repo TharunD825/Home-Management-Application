@@ -29,9 +29,10 @@
 			<div class="ml-auto d-flex flex-row align-items-center justify-content-start">
 				<nav class="main_nav">
 					<ul class="d-flex flex-row align-items-start justify-content-start">
-						<li class="active"><a href="/home">Home</a></li>
+						<li class="active"><a href="/admin">Home</a></li>
 						<li><a href="/about">About us</a></li>
-						<li><a href="/booking">Rooms</a></li>
+						<li><a href="/room add">Rooms add</a></li>
+						<li><a href="/viewrooms">Viwe Rooms</a></li>
 						<li><a href="/blog">Blog</a></li>
 						<li><a href="/contact">Contact</a></li>
 					</ul>
@@ -64,7 +65,6 @@
 			</nav>
 		</div>
 		<div class="menu_extra">
-			<div class="menu_book text-right"><a href="booking.jsp">Book online</a></div>
 			<div class="menu_phone d-flex flex-row align-items-center justify-content-center">
 				<img src="images/phone-2.png" alt="">
 				<span><%= "0183-12345678" %></span>
@@ -86,20 +86,8 @@
 							<div class="row">
 								<div class="col">
 									<div class="home_content text-center">
-										<div class="home_title"><%= "A Luxury Stay" %></div>
-										<div class="booking_form_container">
-											<form action="BookingServlet" method="post" class="booking_form">
-												<div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-													<div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-														<div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-														<div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-														<div><input type="number" name="children" class="booking_input booking_input_b" placeholder="Children" required="required"></div>
-														<div><input type="number" name="room" class="booking_input booking_input_b" placeholder="Room" required="required"></div>
-													</div>
-													<div><button type="submit" class="booking_button trans_200">Book Now</button></div>
-												</div>
-											</form>
-										</div>
+										<div class="home_title"><%= "The Admin Page" %></div>
+										
 									</div>
 								</div>
 							</div>
@@ -115,20 +103,8 @@
 							<div class="row">
 								<div class="col">
 									<div class="home_content text-center">
-										<div class="home_title"><%= "A Luxury Stay" %></div>
-										<div class="booking_form_container">
-											<form action="BookingServlet" method="post" class="booking_form">
-												<div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-													<div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-														<div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-														<div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-														<div><input type="number" name="children" class="booking_input booking_input_b" placeholder="Children" required="required"></div>
-														<div><input type="number" name="room" class="booking_input booking_input_b" placeholder="Room" required="required"></div>
-													</div>
-													<div><button type="submit" class="booking_button trans_200">Book Now</button></div>
-												</div>
-											</form>
-										</div>
+										<div class="home_title"><%= "The Admin Page" %></div>
+										
 									</div>
 								</div>
 							</div>
@@ -144,20 +120,8 @@
 							<div class="row">
 								<div class="col">
 									<div class="home_content text-center">
-										<div class="home_title"><%= "A Luxury Stay" %></div>
-										<div class="booking_form_container">
-											<form action="BookingServlet" method="post" class="booking_form">
-												<div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-													<div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-														<div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-														<div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-														<div><input type="number" name="children" class="booking_input booking_input_b" placeholder="Children" required="required"></div>
-														<div><input type="number" name="room" class="booking_input booking_input_b" placeholder="Room" required="required"></div>
-													</div>
-													<div><button type="submit" class="booking_button trans_200">Book Now</button></div>
-												</div>
-											</form>
-										</div>
+										<div class="home_title"><%= "The Admin Page" %></div>
+										
 									</div>
 								</div>
 							</div>

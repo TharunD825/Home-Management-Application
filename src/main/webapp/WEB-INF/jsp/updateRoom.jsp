@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%
+    RoomResponseDTO room = (RoomResponseDTO) request.getAttribute("room/update/{id}");
+%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +33,6 @@
 <body>
 
 	<div class="super_container">
-
 		<!-- Header -->
 
 		<header class="header">
@@ -42,9 +46,6 @@
 					<nav class="main_nav">
 						<ul
 							class="d-flex flex-row align-items-start justify-content-start">
-							<li class="active"><a href="/">Home</a></li>
-							<li><a href="/register">Register</a></li>
-							
 
 						</ul>
 					</nav>
@@ -71,36 +72,64 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-6 col-md-8 col-sm-12">
+						<div class="row justify-content-center">
+							<div class="col-lg-6 col-md-8 col-sm-12">
+								<form action="/room/update" method="post" class="booking_form">
 
+									<!-- Room ID (Hidden) -->
+									<input type="hidden" name="roomId"
+										value="<%=room.getRoomId()%>">
 
+									<!-- Room Number -->
+									<div class="form-group">
+										<input type="text" name="roomNumber"
+											class="form-control text-center"
+											value="<%=room.getRoomNumber()%>" required>
+									</div>
 
-						<!-- Form -->
-						<div class="booking_form_container text-center"
-							style="margin-top: 200px;">
-							<form class="login_form" action="/user/login" method="post">
+									<!-- Type -->
+									<div class="form-group">
+										<input type="text" name="type"
+											class="form-control text-center"
+											value="<%=room.getType()%>" required>
+									</div>
 
-								<!-- UserName -->
-								<div class="form-group">
-									<input type="text" name="userName"
-										class="booking_input booking_input_a form-control text-center"
-										placeholder="UserName" required>
-								</div>
-								<!-- Password -->
-								<div class="form-group">
-									<input type="password" name="userPassword"
-										class="booking_input booking_input_b form-control text-center"
-										placeholder="Password" required>
-								</div>
+									<!-- Price -->
+									<div class="form-group">
+										<input type="number" name="price"
+											class="form-control text-center"
+											value="<%=room.getPrice()%>" required>
+									</div>
 
-								<!-- Submit -->
-								<div class="form-group">
-									<button type="submit" class="booking_button trans_200">
-										Login</button>
-								</div>
+									<!-- Capacity -->
+									<div class="form-group">
+										<input type="number" name="capacity"
+											class="form-control text-center"
+											value="<%=room.getCapacity()%>" required>
+									</div>
 
-							</form>
+									<!-- Status -->
+									<div class="form-group">
+										<select name="status" class="form-control text-center"
+											required>
+											<option value="AVAILABLE"
+												<%="AVAILABLE".equals(room.getStatus()) ? "selected" : ""%>>Available</option>
+											<option value="BOOKED"
+												<%="BOOKED".equals(room.getStatus()) ? "selected" : ""%>>Booked</option>
+											<option value="MAINTENANCE"
+												<%="MAINTENANCE".equals(room.getStatus()) ? "selected" : ""%>>Maintenance</option>
+										</select>
+									</div>
+
+									<!-- Submit -->
+									<div class="form-group text-center">
+										<button type="submit" class="btn btn-primary">Update
+											Room</button>
+										<a href="/room/list" class="btn btn-secondary">Cancel</a>
+									</div>
+								</form>
+							</div>
 						</div>
-						<!-- End Form -->
 
 					</div>
 				</div>
@@ -186,101 +215,42 @@
 		</footer>
 	</div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector(".login_form");
+	<script>
+document.getElementById("updateRoomForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
+    const roomId = document.getElementById("roomId").value;
+    const data = {
+        roomNumber: document.getElementById("roomNumber").value,
+        roomType: document.getElementById("roomType").value,
+        roomPrice: parseInt(document.getElementById("roomPrice").value),
+        roomCapacity: parseInt(document.getElementById("roomCapacity").value),
+        roomStatus: document.getElementById("roomStatus").value
+    };
 
-        const loginData = {
-            userName: document.querySelector("[name='userName']").value,
-            userPassword: document.querySelector("[name='userPassword']").value
-        };
-
-        fetch("/user/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(loginData)
-        })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error("Login failed with status " + res.status);
-            }
-            return res.json();
-        })
-        .then(result => {
-            // Check if login success flag/message is returned
-            if (result && result.userRole) {
-                // Save values in localStorage
-                if (result.adminId) localStorage.setItem("adminId", result.adminId);
-                if (result.userId) localStorage.setItem("userId", result.userId); // for customer
-
-                localStorage.setItem("userRole", result.userRole);
-                localStorage.setItem("userName", result.userName);
-
-                alert("✅ " + (result.message || "Login successful"));
-
-                // Redirect based on role
-                if (result.userRole.toUpperCase() === "ADMIN") {
-                    window.location.href = "/admin";
-                } else if (result.userRole.toUpperCase() === "CUSTOMER") {
-                    window.location.href = "/home";
-                } else {
-                    window.location.href = "/";
-                }
-            } else {
-                alert("❌ Login failed: Invalid credentials or role missing");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("❌ Invalid username or password");
-        });
+    fetch(`/room/update/${roomId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Error: " + res.statusText);
+        }
+        return res.json();
+    })
+    .then(result => {
+        alert(result.message);
+        window.location.href = "/room/list"; // go back to room list page
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Failed to update room!");
     });
 });
-
-/* document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector(".booking_form");
-
-    form.addEventListener("submit", function(e) {
-        e.preventDefault(); // stop normal form submission
-
-        const data = {
-            userName: document.querySelector("[name='userName']").value,
-            userPassword: document.querySelector("[name='userPassword']").value
-        };
-
-        fetch("/user/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error("Network response was not ok " + res.statusText);
-            }
-            return res.json();
-        })
-        .then(result => {
-            if (result.userRole === "CUSTOMER") {
-                window.location.href = "/home";   // customer dashboard
-            } else if (result.userRole === "ADMIN") {
-                window.location.href = "/admin";  // admin dashboard
-            } else {
-                alert("Invalid role, please contact support.");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("Login failed! Please check username & password.");
-        });
-    });
-}); */
 </script>
-
 
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="styles/bootstrap-4.1.2/popper.js"></script>

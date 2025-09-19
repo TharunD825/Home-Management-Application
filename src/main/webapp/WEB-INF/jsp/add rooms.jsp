@@ -28,7 +28,6 @@
 <body>
 
 	<div class="super_container">
-
 		<!-- Header -->
 
 		<header class="header">
@@ -42,10 +41,7 @@
 					<nav class="main_nav">
 						<ul
 							class="d-flex flex-row align-items-start justify-content-start">
-							<li class="active"><a href="/">Home</a></li>
-							<li><a href="/register">Register</a></li>
 							
-
 						</ul>
 					</nav>
 
@@ -76,26 +72,60 @@
 
 						<!-- Form -->
 						<div class="booking_form_container text-center"
-							style="margin-top: 200px;">
-							<form class="login_form" action="/user/login" method="post">
+							style="margin-top: 100px;">
+							<form class="booking_form" action="/room/add" method="post">
 
 								<!-- UserName -->
 								<div class="form-group">
-									<input type="text" name="userName"
+									<input type="text" name="roomNumber"
 										class="booking_input booking_input_a form-control text-center"
-										placeholder="UserName" required>
-								</div>
-								<!-- Password -->
-								<div class="form-group">
-									<input type="password" name="userPassword"
-										class="booking_input booking_input_b form-control text-center"
-										placeholder="Password" required>
+										placeholder="RoomNumber" required>
 								</div>
 
+								
+								<div class="form-group">
+									<select name="roomType"
+										class="booking_input booking_input_b form-control text-center"
+										required>
+										<option value="" disabled selected>Select Status</option>
+										<option value="SINGLE">Single</option>
+										<option value="DOUBLE">Double</option>
+										<option value="DELUXE">Deluxe</option>
+										<option value="SUITE">Suite</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<input type="number" name="roomPrice"
+										class="booking_input booking_input_b form-control text-center"
+										placeholder="RoomPrice" required>
+								</div>
+								
+								<div class="form-group">
+									<input type="text" name="roomCapacity"
+										class="booking_input booking_input_b form-control text-center"
+										placeholder="Room Capacity" required>
+								</div>
+								
+
+								
+								<div class="form-group">
+									<select name="roomStatus"
+										class="booking_input booking_input_b form-control text-center"
+										required>
+										<option value="" disabled selected>Select Status</option>
+										<option value="AVAILABLE">Available</option>
+										<option value="BOOKED">Booked</option>
+										<option value="UNDER_MAINTENANCE">Under_Maintenance</option>
+									</select>
+								</div>
+								
+								<input type="hidden" name="admin" id="adminId">
+								
 								<!-- Submit -->
 								<div class="form-group">
 									<button type="submit" class="booking_button trans_200">
-										Login</button>
+										Add Room</button>
 								</div>
 
 							</form>
@@ -186,76 +216,36 @@
 		</footer>
 	</div>
 
-<script>
+	<script>
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector(".login_form");
+    const form = document.querySelector(".booking_form");
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const loginData = {
-            userName: document.querySelector("[name='userName']").value,
-            userPassword: document.querySelector("[name='userPassword']").value
+        // ✅ Get adminId from localStorage
+        const adminId = localStorage.getItem("adminId");
+
+        if (!adminId) {
+            alert("❌ Admin not logged in. Please login first.");
+            window.location.href = "/login"; // redirect to login page
+            return;
+        }
+
+        // ✅ Collect form data
+        const data = {
+            roomNumber: document.querySelector("[name='roomNumber']").value,
+            roomType: document.querySelector("[name='roomType']").value,
+            roomPrice: parseFloat(document.querySelector("[name='roomPrice']").value),
+            roomCapacity: parseInt(document.querySelector("[name='roomCapacity']").value),
+            roomStatus: document.querySelector("[name='roomStatus']").value,
+            adminId: parseInt(adminId)  // ✅ must match backend DTO/Entity field
         };
 
-        fetch("/user/login", {
+        // ✅ Send JSON request
+        fetch("/room/add", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(loginData)
-        })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error("Login failed with status " + res.status);
-            }
-            return res.json();
-        })
-        .then(result => {
-            // Check if login success flag/message is returned
-            if (result && result.userRole) {
-                // Save values in localStorage
-                if (result.adminId) localStorage.setItem("adminId", result.adminId);
-                if (result.userId) localStorage.setItem("userId", result.userId); // for customer
-
-                localStorage.setItem("userRole", result.userRole);
-                localStorage.setItem("userName", result.userName);
-
-                alert("✅ " + (result.message || "Login successful"));
-
-                // Redirect based on role
-                if (result.userRole.toUpperCase() === "ADMIN") {
-                    window.location.href = "/admin";
-                } else if (result.userRole.toUpperCase() === "CUSTOMER") {
-                    window.location.href = "/home";
-                } else {
-                    window.location.href = "/";
-                }
-            } else {
-                alert("❌ Login failed: Invalid credentials or role missing");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("❌ Invalid username or password");
-        });
-    });
-});
-
-/* document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector(".booking_form");
-
-    form.addEventListener("submit", function(e) {
-        e.preventDefault(); // stop normal form submission
-
-        const data = {
-            userName: document.querySelector("[name='userName']").value,
-            userPassword: document.querySelector("[name='userPassword']").value
-        };
-
-        fetch("/user/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
             body: JSON.stringify(data)
         })
         .then(res => {
@@ -265,22 +255,16 @@ document.addEventListener("DOMContentLoaded", function () {
             return res.json();
         })
         .then(result => {
-            if (result.userRole === "CUSTOMER") {
-                window.location.href = "/home";   // customer dashboard
-            } else if (result.userRole === "ADMIN") {
-                window.location.href = "/admin";  // admin dashboard
-            } else {
-                alert("Invalid role, please contact support.");
-            }
+            alert("✅ Room Added Successfully!");
+            window.location.href = "/admin"; // redirect after success
         })
         .catch(error => {
             console.error("Error:", error);
-            alert("Login failed! Please check username & password.");
+            alert("❌ Failed to add room! Make sure AdminId is set.");
         });
     });
-}); */
+});
 </script>
-
 
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="styles/bootstrap-4.1.2/popper.js"></script>

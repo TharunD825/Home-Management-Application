@@ -12,4 +12,7 @@ public interface AdminRepository extends JpaRepository<Admin, Integer>{
 	
 	Optional<Admin> findByAdminEmail(String adminEmail);
 
+	Admin findByAdminId(Integer adminId);
+
+
 }

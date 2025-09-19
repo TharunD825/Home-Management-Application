@@ -36,9 +36,9 @@ public class HomeController {
         return "contact"; 
     }
 
-    @GetMapping("/room")
+    @GetMapping("/room add")
     public String room() {
-        return "room"; 
+        return "add rooms"; 
     }
     
     @GetMapping("/blog")
@@ -55,4 +55,15 @@ public class HomeController {
     public String admin() {
         return "admin"; 
     }
+    
+    @GetMapping("/viewrooms")
+    public String view() {
+        return "view rooms"; 
+    }
+    
+    @GetMapping("/update room")
+    public String updatrRoom() {
+        return "updateRoom"; 
+    }
+    
 }

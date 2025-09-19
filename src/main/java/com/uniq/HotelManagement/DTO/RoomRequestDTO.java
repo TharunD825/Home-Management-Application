@@ -2,7 +2,8 @@ package com.uniq.HotelManagement.DTO;
 
 public class RoomRequestDTO {
 	
-	private String adminEmail;
+	private Integer adminId;
+	//private String adminEmail;
 //	private String adminPassword;
 	
 	private String roomNumber;
@@ -17,10 +18,11 @@ public class RoomRequestDTO {
 	}
 
 
-	public RoomRequestDTO(String adminEmail, String roomNumber, String roomType,
+	public RoomRequestDTO(Integer adminId, String roomNumber, String roomType,
 			Integer roomPrice, Integer roomCapacity, String roomStatus) {
 		super();
-		this.adminEmail = adminEmail;
+		this.adminId=adminId;
+		//this.adminEmail = adminEmail;
 //		this.adminPassword = adminPassword;
 		this.roomNumber = roomNumber;
 		this.roomType = roomType;
@@ -28,17 +30,18 @@ public class RoomRequestDTO {
 		this.roomCapacity = roomCapacity;
 		this.roomStatus = roomStatus;
 	}
+
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
+
+
 	
-
-	public String getAdminEmail() {
-		return adminEmail;
-	}
-
-
-	public void setAdminEmail(String adminEmail) {
-		this.adminEmail = adminEmail;
-	}
-
 
 //	public String getAdminPassword() {
 //		return adminPassword;
@@ -102,9 +105,10 @@ public class RoomRequestDTO {
 
 	@Override
 	public String toString() {
-		return "RoomRequestDTO [adminEmail=" + adminEmail + ", roomNumber=" + roomNumber + ", roomType=" + roomType
+		return "RoomRequestDTO [adminId=" + adminId + ", roomNumber=" + roomNumber + ", roomType=" + roomType
 				+ ", roomPrice=" + roomPrice + ", roomCapacity=" + roomCapacity + ", roomStatus=" + roomStatus + "]";
 	}
-	
 
+
+	
 }

@@ -23,7 +23,7 @@ public class BookingController {
 		
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/roombooking")
 	public BookingResponseDTO createBooking(@RequestBody BookingRequestDTO bookingRequestDTO) {
 		
 		BookingResponseDTO bookingResponseDTO = bookingService.createBooking(bookingRequestDTO);

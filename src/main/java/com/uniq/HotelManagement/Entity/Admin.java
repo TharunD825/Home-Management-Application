@@ -31,7 +31,7 @@ public class Admin {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "userId")
 	@JsonBackReference
-	private User user;
+	private Users user;
 	
     @Column(name = "admin_name", nullable = false)
 	private String adminName;
@@ -62,7 +62,7 @@ public class Admin {
 		super();
 	}
 
-	public Admin(User user, String adminName, String adminEmail, String adminPassword, UserRole adminRole,
+	public Admin(Users user, String adminName, String adminEmail, String adminPassword, UserRole adminRole,
 			LocalDateTime createdAt) {
 		super();
 		this.user = user;
@@ -79,12 +79,12 @@ public class Admin {
 	}
 	
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

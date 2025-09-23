@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	<%
-    RoomResponseDTO room = (RoomResponseDTO) request.getAttribute("room/update/{id}");
+<%@ page import="com.uniq.HotelManagement.DTO.UpdateRoomRequestDTO"%>
+<%
+UpdateRoomRequestDTO room = (UpdateRoomRequestDTO) request.getAttribute("room");
 %>
-	
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +39,7 @@
 			<div
 				class="header_content d-flex flex-row align-items-center justify-content-start">
 				<div class="logo">
-					<a href="#">The River</a>
+					<a href="/update">The River</a>
 				</div>
 				<div
 					class="ml-auto d-flex flex-row align-items-center justify-content-start">
@@ -49,12 +49,6 @@
 
 						</ul>
 					</nav>
-
-					<div
-						class="header_phone d-flex flex-row align-items-center justify-content-center">
-						<img src="images/phone.png" alt=""> <span><%="0183-12345678"%></span>
-					</div>
-
 					<!-- Hamburger Menu -->
 					<div class="hamburger">
 						<i class="fa fa-bars" aria-hidden="true"></i>
@@ -73,53 +67,53 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 col-md-8 col-sm-12">
 						<div class="row justify-content-center">
-							<div class="col-lg-6 col-md-8 col-sm-12">
-								<form action="/room/update" method="post" class="booking_form">
-
-									<!-- Room ID (Hidden) -->
-									<input type="hidden" name="roomId"
-										value="<%=room.getRoomId()%>">
+							<div class="booking_form_container text-center"
+								style="margin-top: 100px;">
+								<form id="updateRoomForm">
+									<!-- Hidden Room ID -->
+									<input type="hidden" id="roomId" value="${room.roomId}">
 
 									<!-- Room Number -->
 									<div class="form-group">
-										<input type="text" name="roomNumber"
-											class="form-control text-center"
-											value="<%=room.getRoomNumber()%>" required>
+										<input type="text" id="roomNumber" name="roomNumber"
+											class="form-control text-center" value="${room.roomNumber}"
+											required>
 									</div>
 
 									<!-- Type -->
 									<div class="form-group">
-										<input type="text" name="type"
-											class="form-control text-center"
-											value="<%=room.getType()%>" required>
+										<input type="text" id="roomType" name="roomType"
+											class="form-control text-center" value="${room.roomType}"
+											required>
 									</div>
 
 									<!-- Price -->
 									<div class="form-group">
-										<input type="number" name="price"
-											class="form-control text-center"
-											value="<%=room.getPrice()%>" required>
+										<input type="number" id="roomPrice" name="roomPrice"
+											class="form-control text-center" value="${room.roomPrice}"
+											required>
 									</div>
 
 									<!-- Capacity -->
 									<div class="form-group">
-										<input type="number" name="capacity"
-											class="form-control text-center"
-											value="<%=room.getCapacity()%>" required>
+										<input type="number" id="roomCapacity" name="roomCapacity"
+											class="form-control text-center" value="${room.roomCapacity}"
+											required>
 									</div>
 
 									<!-- Status -->
 									<div class="form-group">
-										<select name="status" class="form-control text-center"
-											required>
+										<select id="roomStatus" name="roomStatus"
+											class="form-control text-center" required>
 											<option value="AVAILABLE"
-												<%="AVAILABLE".equals(room.getStatus()) ? "selected" : ""%>>Available</option>
+												<c:if test="${room.roomStatus eq 'AVAILABLE'}">selected</c:if>>Available</option>
 											<option value="BOOKED"
-												<%="BOOKED".equals(room.getStatus()) ? "selected" : ""%>>Booked</option>
+												<c:if test="${room.roomStatus eq 'BOOKED'}">selected</c:if>>Booked</option>
 											<option value="MAINTENANCE"
-												<%="MAINTENANCE".equals(room.getStatus()) ? "selected" : ""%>>Maintenance</option>
+												<c:if test="${room.roomStatus eq 'MAINTENANCE'}">selected</c:if>>Maintenance</option>
 										</select>
 									</div>
+
 
 									<!-- Submit -->
 									<div class="form-group text-center">
@@ -207,7 +201,7 @@
 			</div>
 
 			<div class="copyright text-center py-3">
-				Copyright &copy;<%= java.time.Year.now().getValue() %>
+				Copyright &copy;<%=java.time.Year.now().getValue()%>
 				All rights reserved | This template is made with <i
 					class="fa fa-heart-o" aria-hidden="true"></i> by <a
 					href="https://colorlib.com" target="_blank">Colorlib</a>

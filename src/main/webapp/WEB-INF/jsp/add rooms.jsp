@@ -41,14 +41,9 @@
 					<nav class="main_nav">
 						<ul
 							class="d-flex flex-row align-items-start justify-content-start">
-							
+
 						</ul>
 					</nav>
-
-					<div
-						class="header_phone d-flex flex-row align-items-center justify-content-center">
-						<img src="images/phone.png" alt=""> <span><%="0183-12345678"%></span>
-					</div>
 
 					<!-- Hamburger Menu -->
 					<div class="hamburger">
@@ -82,7 +77,7 @@
 										placeholder="RoomNumber" required>
 								</div>
 
-								
+
 								<div class="form-group">
 									<select name="roomType"
 										class="booking_input booking_input_b form-control text-center"
@@ -100,15 +95,15 @@
 										class="booking_input booking_input_b form-control text-center"
 										placeholder="RoomPrice" required>
 								</div>
-								
+
 								<div class="form-group">
 									<input type="text" name="roomCapacity"
 										class="booking_input booking_input_b form-control text-center"
 										placeholder="Room Capacity" required>
 								</div>
-								
 
-								
+
+
 								<div class="form-group">
 									<select name="roomStatus"
 										class="booking_input booking_input_b form-control text-center"
@@ -119,9 +114,9 @@
 										<option value="UNDER_MAINTENANCE">Under_Maintenance</option>
 									</select>
 								</div>
-								
+
 								<input type="hidden" name="admin" id="adminId">
-								
+
 								<!-- Submit -->
 								<div class="form-group">
 									<button type="submit" class="booking_button trans_200">

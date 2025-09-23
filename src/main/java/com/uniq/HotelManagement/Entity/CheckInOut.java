@@ -34,7 +34,7 @@ public class CheckInOut {
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "userId")
 	@JsonBackReference
-	private User user;
+	private Users user;
 	
 	@ManyToOne
 	@JoinColumn(name = "admin_id", referencedColumnName = "adminId" )
@@ -67,7 +67,7 @@ public class CheckInOut {
 		super();
 	}
 
-	public CheckInOut(Booking booking, User user, Admin admin, Room room, LocalDate checkInDate, LocalDate checkOutDate,
+	public CheckInOut(Booking booking, Users user, Admin admin, Room room, LocalDate checkInDate, LocalDate checkOutDate,
 			CheckInOutStatus checkInOutStatus, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super();
 		this.booking = booking;
@@ -94,11 +94,11 @@ public class CheckInOut {
 		this.booking = booking;
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

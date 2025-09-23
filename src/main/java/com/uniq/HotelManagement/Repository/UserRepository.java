@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.uniq.HotelManagement.Entity.Admin;
-import com.uniq.HotelManagement.Entity.User;
+import com.uniq.HotelManagement.Entity.Users;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<Users, Integer> {
 
-	User findByUserName(String username);
+	Users findByUserName(String username);
 	
-	Optional<User> findByUserEmail(String userEmail);
+	Optional<Users> findByUserEmail(String userEmail);
 
 
 }

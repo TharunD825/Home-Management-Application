@@ -3,6 +3,7 @@ package com.uniq.HotelManagement.Entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uniq.HotelManagement.Enum.UserRole;
 
@@ -20,7 +21,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user_details")
-public class User {
+public class Users {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,24 +50,26 @@ public class User {
 	private LocalDateTime createdAt;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	//@JsonManagedReference
+	@JsonIgnore
 	private List<Booking> booking;
 	
 	@OneToOne(mappedBy = "user")
-	@JsonManagedReference
+	//@JsonManagedReference
+	@JsonIgnore
 	private Admin admin;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	//@JsonManagedReference
 	private List<CheckInOut> checkInOut;
 	
 	
-	public User() {
+	public Users() {
 		super();
 	}
 
 
-	public User(String userName, String userEmail, String userPassword, String userPhone,
+	public Users(String userName, String userEmail, String userPassword, String userPhone,
 			UserRole userRole, String userAddress, LocalDateTime createdAt) {
 		super();
 		

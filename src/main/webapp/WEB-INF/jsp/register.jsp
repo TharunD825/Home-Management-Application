@@ -34,7 +34,7 @@
 			<div
 				class="header_content d-flex flex-row align-items-center justify-content-start">
 				<div class="logo">
-					<a href="#">The River</a>
+					<a href="/register">The River</a>
 				</div>
 				<div
 					class="ml-auto d-flex flex-row align-items-center justify-content-start">
@@ -47,11 +47,6 @@
 
 						</ul>
 					</nav>
-
-					<div
-						class="header_phone d-flex flex-row align-items-center justify-content-center">
-						<img src="images/phone.png" alt=""> <span><%="0183-12345678"%></span>
-					</div>
 
 					<!-- Hamburger Menu -->
 					<div class="hamburger">
@@ -70,8 +65,6 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-6 col-md-8 col-sm-12">
-
-
 
 						<!-- Form -->
 						<div class="booking_form_container text-center"

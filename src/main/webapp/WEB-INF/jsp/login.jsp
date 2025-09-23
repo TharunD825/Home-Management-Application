@@ -35,7 +35,7 @@
 			<div
 				class="header_content d-flex flex-row align-items-center justify-content-start">
 				<div class="logo">
-					<a href="#">The River</a>
+					<a href="/login">The River</a>
 				</div>
 				<div
 					class="ml-auto d-flex flex-row align-items-center justify-content-start">
@@ -44,15 +44,8 @@
 							class="d-flex flex-row align-items-start justify-content-start">
 							<li class="active"><a href="/">Home</a></li>
 							<li><a href="/register">Register</a></li>
-							
-
 						</ul>
 					</nav>
-
-					<div
-						class="header_phone d-flex flex-row align-items-center justify-content-center">
-						<img src="images/phone.png" alt=""> <span><%="0183-12345678"%></span>
-					</div>
 
 					<!-- Hamburger Menu -->
 					<div class="hamburger">
@@ -186,7 +179,7 @@
 		</footer>
 	</div>
 
-<script>
+	<script>
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector(".login_form");
 

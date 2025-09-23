@@ -3,20 +3,20 @@ package com.uniq.HotelManagement.Mapper;
 import com.uniq.HotelManagement.DTO.UserRequestDTO;
 import com.uniq.HotelManagement.DTO.UserResponseDTO;
 import com.uniq.HotelManagement.Enum.UserRole;
-import com.uniq.HotelManagement.Entity.User;
+import com.uniq.HotelManagement.Entity.Users;
 
 public class UserMapper {
 	
 	
 	//UserRequestDTO to Entity(User)
-	public static User toEntity(UserRequestDTO userDTO) {
+	public static Users toEntity(UserRequestDTO userDTO) {
 		
 		if(userDTO == null) {
 			
 			return null;
 		}
 		
-		User user = new User();
+		Users user = new Users();
 		
 		/* ----- x ----- */
 		
@@ -40,7 +40,7 @@ public class UserMapper {
 	
 	
 	//Entity(User) to UserResponseDTO
-	public static UserResponseDTO toUserResponseDTO(User user) {
+	public static UserResponseDTO toUserResponseDTO(Users user) {
 		
 		if(user == null) {
 			

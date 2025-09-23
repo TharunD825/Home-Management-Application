@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uniq.HotelManagement.Enum.BookingStatus;
 
@@ -31,14 +30,12 @@ public class Booking {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "userId")
-	//@JsonBackReference("user-bookings")
-	@JsonIgnore
-	private Users user;
+	@JsonBackReference
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "room_id", referencedColumnName = "roomId")
-	//@JsonBackReference
-	@JsonIgnore
+	@JsonBackReference
 	private Room room;
 	
 	@Column(name = "check_in_date")
@@ -55,8 +52,7 @@ public class Booking {
 	private LocalDateTime createdAt;
 	
 	@OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-	//@JsonManagedReference
-	@JsonIgnore
+	@JsonManagedReference
 	private List<CheckInOut> checkInOut;
 	
 
@@ -64,7 +60,7 @@ public class Booking {
 		super();
 	}
 
-	public Booking(Users user, Room room, String checkInDate, String checkOutDate, BookingStatus bookingStatus,
+	public Booking(User user, Room room, String checkInDate, String checkOutDate, BookingStatus bookingStatus,
 			LocalDateTime createdAt) {
 		super();
 		this.user = user;
@@ -80,11 +76,11 @@ public class Booking {
 		return bookingId;
 	}
 
-	public Users getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

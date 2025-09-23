@@ -2,9 +2,6 @@ package com.uniq.HotelManagement.DTO;
 
 import java.time.LocalDateTime;
 
-import com.uniq.HotelManagement.Enum.RoomStatus;
-import com.uniq.HotelManagement.Enum.RoomType;
-
 public class RoomResponseDTO {
 	
 	 private Integer roomId;
@@ -20,7 +17,6 @@ public class RoomResponseDTO {
 		super();
 	 }
 
-
 	 public RoomResponseDTO(Integer roomId, String roomNumber, String roomType, Integer roomPrice, Integer roomCapacity,
 			String roomStatus, LocalDateTime createdAt) {
 		super();
@@ -32,77 +28,35 @@ public class RoomResponseDTO {
 		this.roomStatus = roomStatus;
 		this.createdAt = createdAt;
 	 }
-
+	 
 
 	 public Integer getRoomId() {
 		 return roomId;
 	 }
 
-
-	 public void setRoomId(Integer roomId) {
-		 this.roomId = roomId;
-	 }
-
-
 	 public String getRoomNumber() {
 		 return roomNumber;
 	 }
-
-
-	 public void setRoomNumber(String roomNumber) {
-		 this.roomNumber = roomNumber;
-	 }
-
 
 	 public String getRoomType() {
 		 return roomType;
 	 }
 
-
-	 public void setRoomType(String roomType) {
-		 this.roomType = roomType;
-	 }
-
-
 	 public Integer getRoomPrice() {
 		 return roomPrice;
 	 }
-
-
-	 public void setRoomPrice(Integer roomPrice) {
-		 this.roomPrice = roomPrice;
-	 }
-
 
 	 public Integer getRoomCapacity() {
 		 return roomCapacity;
 	 }
 
-
-	 public void setRoomCapacity(Integer roomCapacity) {
-		 this.roomCapacity = roomCapacity;
-	 }
-
-
 	 public String getRoomStatus() {
 		 return roomStatus;
 	 }
 
-
-	 public void setRoomStatus(String roomStatus) {
-		 this.roomStatus = roomStatus;
-	 }
-
-
 	 public LocalDateTime getCreatedAt() {
 		 return createdAt;
 	 }
-
-
-	 public void setCreatedAt(LocalDateTime createdAt) {
-		 this.createdAt = createdAt;
-	 }
-
 
 	 @Override
 	 public String toString() {
@@ -111,6 +65,5 @@ public class RoomResponseDTO {
 				+ ", createdAt=" + createdAt + "]";
 	 }
 
-	 
-	
+
 }

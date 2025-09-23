@@ -13,9 +13,10 @@ import com.uniq.HotelManagement.Entity.CheckInOut;
 @Repository
 public interface CheckInOutRepository extends JpaRepository<CheckInOut, Integer>{
 	
-	@Query("SELECT c FROM CheckInOut c WHERE c.room.roomId = :roomId AND :checkInDate < c.checkInDate AND :checkOutDate > c.checkOutDate")
+	@Query("SELECT c FROM CheckInOut c WHERE c.room.roomId = :roomId AND :checkInDate < c.checkOutDate AND :checkOutDate > c.checkInDate ")
 	List<CheckInOut> findBookings(@Param("roomId") Integer roomId, @Param("checkInDate") LocalDate checkInDate, @Param("checkOutDate") LocalDate checkOutDate);
 	
 	//to filter the data at which date is not booked
+	
 
 }

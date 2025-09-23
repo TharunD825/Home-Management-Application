@@ -3,7 +3,8 @@ package com.uniq.HotelManagement.Entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uniq.HotelManagement.Enum.RoomStatus;
 import com.uniq.HotelManagement.Enum.RoomType;
 
@@ -47,20 +48,17 @@ public class Room {
 	private RoomStatus roomStatus;
 	
 	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-	//@JsonManagedReference
-	@JsonIgnore
+	@JsonManagedReference
 	private List<Booking> booking;
 	
 	@ManyToOne(fetch = FetchType.LAZY)  //by default @ManyToOne and @OneToMany is Eager loading.. 
                                      	//so i made it lazy (associated entity is loaded only when required)
 	@JoinColumn(name = "admin_id", referencedColumnName = "adminId")
-	//@JsonBackReference
-	@JsonIgnore
+	@JsonBackReference
 	private Admin admin;
 	
 	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-	//@JsonManagedReference
-	@JsonIgnore
+	@JsonManagedReference
 	private List<CheckInOut> checkInOut;
 	
 	@Column(name = "created_at", updatable = false)

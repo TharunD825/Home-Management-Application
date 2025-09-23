@@ -1,6 +1,8 @@
 package com.uniq.HotelManagement.Entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.uniq.HotelManagement.Enum.CheckInOutStatus;
 
@@ -32,7 +34,7 @@ public class CheckInOut {
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "userId")
 	@JsonBackReference
-	private Users user;
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "admin_id", referencedColumnName = "adminId" )
@@ -54,13 +56,19 @@ public class CheckInOut {
 	@Column(nullable = false)
 	private CheckInOutStatus checkInOutStatus;
 	
+	@Column(name = "created_at", updatable = false)
+	private LocalDateTime createdAt;
+	
+	@Column(name = "updated_at", updatable = false)
+	private LocalDateTime updatedAt;
+	
 
 	public CheckInOut() {
 		super();
 	}
 
-	public CheckInOut(Booking booking, Users user, Admin admin, Room room, LocalDate checkInDate, LocalDate checkOutDate,
-			CheckInOutStatus checkInOutStatus) {
+	public CheckInOut(Booking booking, User user, Admin admin, Room room, LocalDate checkInDate, LocalDate checkOutDate,
+			CheckInOutStatus checkInOutStatus, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super();
 		this.booking = booking;
 		this.user = user;
@@ -69,6 +77,8 @@ public class CheckInOut {
 		this.checkInDate = checkInDate;
 		this.checkOutDate = checkOutDate;
 		this.checkInOutStatus = checkInOutStatus;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 
@@ -84,11 +94,11 @@ public class CheckInOut {
 		this.booking = booking;
 	}
 
-	public Users getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -133,10 +143,27 @@ public class CheckInOut {
 		this.checkInOutStatus = checkInOutStatus;
 	}
 
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	@Override
 	public String toString() {
 		return "CheckInOut [checkInOutId=" + checkInOutId + ", checkInDate=" + checkInDate + ", checkOutDate="
-				+ checkOutDate + ", checkInOutStatus=" + checkInOutStatus + "]";
+				+ checkOutDate + ", checkInOutStatus=" + checkInOutStatus + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + "]";
 	}
 
 	

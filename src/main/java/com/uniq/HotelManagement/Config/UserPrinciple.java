@@ -7,14 +7,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.uniq.HotelManagement.Entity.Users;
+import com.uniq.HotelManagement.Entity.User;
 
 
 public class UserPrinciple implements UserDetails {
 
-private Users user;
+private User user;
 	
-	public UserPrinciple(Users user) {
+	public UserPrinciple(User user) {
 		this.user=user;
 	}
 

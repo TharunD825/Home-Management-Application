@@ -10,10 +10,12 @@ import com.uniq.HotelManagement.DTO.UserRequestDTO;
 import com.uniq.HotelManagement.DTO.UserResponseDTO;
 import com.uniq.HotelManagement.Mapper.UserMapper;
 import com.uniq.HotelManagement.Entity.Admin;
-import com.uniq.HotelManagement.Entity.Users;
+import com.uniq.HotelManagement.Entity.User;
 import com.uniq.HotelManagement.Enum.UserRole;
 import com.uniq.HotelManagement.Repository.AdminRepository;
 import com.uniq.HotelManagement.Repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -36,10 +38,11 @@ public class UserServiceImp implements UserService {
 	
 	/* ----- POST ----- */
 	
+	@Transactional
 	public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
 		
 		
-		Users user = UserMapper.toEntity(userRequestDTO); //converting RequestDTO to Entity(User)
+		User user = UserMapper.toEntity(userRequestDTO); //converting RequestDTO to Entity(User)
 		
 		/* ----- PASSWORD ENCRYPTION ----- */
 		
@@ -54,7 +57,7 @@ public class UserServiceImp implements UserService {
 		user.setCreatedAt(LocalDateTime.now()); // setting the local time
 		
 		
-		Users savedUser = userRepository.save(user); // Saving data in Entity(User)
+		User savedUser = userRepository.save(user); // Saving data in Entity(User)
 		
 		
 		/* ----- SAVING ADMIN DETAILS IN ADMIN ----- */
